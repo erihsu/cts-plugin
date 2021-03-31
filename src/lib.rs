@@ -13,8 +13,8 @@ pub trait PdkPlugin {
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
     fn get_buffer(&self, name: &str) -> CTSPluginRes<Value>;
     fn list_all_clock_buffer(&self) -> CTSPluginRes<Vec<String>>;
-    fn get_clock_routing_layer_resistance(&self) -> CTSPluginRes<f32>;
-    fn get_clock_routing_layer_capacitance(&self) -> CTSPluginRes<f32>;
+    fn get_unit_resistance(&self) -> CTSPluginRes<f32>; // fF
+    fn get_unit_capacitance(&self) -> CTSPluginRes<f32>; // kohm
     fn get_layer_map(&self) -> CTSPluginRes<Vec<(i16, String)>>;
     fn get_via_map(&self) -> CTSPluginRes<Vec<(i16, String)>>;
 }
