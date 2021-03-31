@@ -1,6 +1,6 @@
+use serde_json::Value;
 use std::error::Error;
 use std::io::{Read, Write};
-
 mod error;
 pub use error::*;
 pub trait DEFPlugin {
@@ -11,8 +11,7 @@ pub trait DEFPlugin {
 pub trait PdkPlugin {
     fn login(&mut self) -> CTSPluginRes<()>;
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
-    fn get_buffer_power_model<T>(&self, name: &str) -> CTSPluginRes<T>;
-    fn get_buffer_timing_model<T>(&self, name: &str) -> CTSPluginRes<T>;
+    fn get_buffer(&self, name: &str) -> CTSPluginRes<Value>;
     fn list_all_clock_buffer(&self) -> CTSPluginRes<Vec<String>>;
     fn get_clock_routing_layer_resistance(&self) -> CTSPluginRes<f32>;
     fn get_clock_routing_layer_capacitance(&self) -> CTSPluginRes<f32>;
