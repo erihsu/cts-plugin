@@ -6,7 +6,7 @@ pub trait DEFPlugin {
 }
 
 pub trait PdkPlugin {
-    fn login();
+    fn login(&mut self);
     fn get_sink_cap(&self, name: &str) -> f32;
     fn get_buffer_power_model<T>(&self, name: &str) -> T;
     fn get_buffer_timing_model<T>(&self, name: &str) -> T;
