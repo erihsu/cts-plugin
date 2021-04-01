@@ -1,15 +1,10 @@
 use serde_json::Value;
 use std::error::Error;
-use std::io::{Read, Write};
-mod error;
-pub use error::*;
-pub trait DEFPlugin {
-    fn export_def<W: Write>(&self, f: &mut W);
-    fn import_def<R: Read>(&mut self, f: &mut R);
-}
 
 pub trait PdkPlugin {
-    fn login(&mut self) -> CTSPluginRes<()>;
+    fn login() -> CTSPluginRes<Self>
+    where
+        Self: Sized; // create connection
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
     fn get_buffer(&self, name: &str) -> CTSPluginRes<Value>;
     fn list_all_clock_buffer(&self) -> CTSPluginRes<Vec<String>>;
@@ -35,6 +30,8 @@ pub trait DesignPlugin {
     ) -> CTSPluginRes<()>;
     fn prepare_layer_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
     fn prepare_via_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
+    fn export_def(&self, path: &str) -> CTSPluginRes<()>;
+    fn import_def(&mut self, f: &str) -> CTSPluginRes<()>;
 }
 
 pub type CTSPluginRes<T> = Result<T, Box<dyn Error>>;
