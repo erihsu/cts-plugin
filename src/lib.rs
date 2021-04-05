@@ -33,6 +33,7 @@ pub trait DesignPlugin {
     fn prepare_via_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
     fn import_def(&mut self, f: &str) -> CTSPluginRes<()>;
+    fn get_length_dbu(&self) -> CTSPluginRes<u32>;
 }
 
 pub type CTSPluginRes<T> = Result<T, Box<dyn Error>>;
