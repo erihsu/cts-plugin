@@ -6,6 +6,7 @@ pub trait PdkPlugin {
     where
         Self: Sized; // create connection
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
+    fn get_sink_clk_pin_offset(&self,name:&str) -> CTSPluginRes<(f32,f32)>;
     fn get_buffer(&self, name: &str) -> CTSPluginRes<Value>;
     fn list_all_clock_buffer(&self) -> CTSPluginRes<Vec<String>>;
     fn get_unit_resistance(&self) -> CTSPluginRes<f32>; // fF
