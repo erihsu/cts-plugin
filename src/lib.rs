@@ -16,10 +16,10 @@ pub trait PdkPlugin {
 
 pub trait DesignPlugin {
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32), i8)>>;
-    fn add_clocknet_seg(
+    fn add_clock_net(
         &mut self,
-        name: &str,
-        seg: Vec<((i32, i32), Vec<(i32, i32)>)>,
+        net_name:&str,
+        net: &Vec<Route>,
     ) -> CTSPluginRes<()>;
     fn add_clock_buffer(
         &mut self,
@@ -32,6 +32,28 @@ pub trait DesignPlugin {
     fn prepare_via_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
     fn import_def(&mut self, f: &str) -> CTSPluginRes<()>;
+    fn get_length_dbu(&self) -> CTSPluginRes<u32>;
 }
 
 pub type CTSPluginRes<T> = Result<T, Box<dyn Error>>;
+
+
+pub struct Route<'a> {
+    pub layer: &'a str,
+    pub element: Vec<Element<'a>>
+}
+
+pub enum Element<'a > {
+    Path(Path),
+    Via(Via<'a>),
+}
+
+pub struct Path {
+    pub from:(i32,i32),
+    pub to:(i32,i32),
+}
+
+pub struct Via<'a> {
+    pub coord:(i32,i32),
+    pub vname:&'a str,
+}
