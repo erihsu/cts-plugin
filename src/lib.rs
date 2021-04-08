@@ -2,7 +2,7 @@ use serde_json::Value;
 use std::error::Error;
 
 pub trait PdkPlugin {
-    fn login(&mut self);
+    fn login(&mut self,username:&str,password:&str);
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
     fn get_sink_clk_pin_offset(&self,name:&str) -> CTSPluginRes<(f32,f32)>;
     fn get_buffer(&self, name: &str) -> CTSPluginRes<Value>;
