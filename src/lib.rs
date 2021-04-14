@@ -5,17 +5,24 @@ pub trait PdkPlugin {
     fn login() -> CTSPluginRes<Self>
     where
         Self: Sized; // create connection
+    // given model name , get clk pin input capacitance
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
-    fn get_sink_clk_pin_offset(&self,name:&str) -> CTSPluginRes<(f32,f32)>;
+    // given model name and placement orient code, get its clk pin offset 
+    fn get_sink_clk_pin_offset(&self,name:&str,orient:u8) -> CTSPluginRes<(f32,f32)>;
+    // given model name, get buffer detailed information which includes power and timing
     fn get_buffer(&self, name: &str) -> CTSPluginRes<Value>;
+    // list all avaliale buffer for clock tree synthesis
     fn list_all_clock_buffer(&self) -> CTSPluginRes<Vec<String>>;
+    // get metal layer unit resistance 
     fn get_unit_resistance(&self) -> CTSPluginRes<f32>; // fF
+    // get metal layer unit capacitance
     fn get_unit_capacitance(&self) -> CTSPluginRes<f32>; // kohm
     fn get_layer_map(&self) -> CTSPluginRes<Vec<(i16, String)>>;
     fn get_via_map(&self) -> CTSPluginRes<Vec<(i16, String)>>;
 }
 
 pub trait DesignPlugin {
+    // given clock network name, return a set of sinks. The information include model name, sink location and sink placement orient
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32), i8)>>;
     fn add_clock_net(
         &mut self,
