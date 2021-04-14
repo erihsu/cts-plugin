@@ -2,10 +2,8 @@ use serde_json::Value;
 use std::error::Error;
 
 pub trait PdkPlugin {
-    fn login() -> CTSPluginRes<Self>
-    where
-        Self: Sized; // create connection
     // given model name , get clk pin input capacitance
+    fn login(&mut self,username:&str,password:&str);
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
     // given model name and placement orient code, get its clk pin offset 
     fn get_sink_clk_pin_offset(&self,name:&str,orient:u8) -> CTSPluginRes<(f32,f32)>;
