@@ -22,22 +22,27 @@ pub trait PdkPlugin {
 pub trait DesignPlugin {
     // given clock network name, return a set of sinks. The information include model name, sink location and sink placement orient
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32), i8)>>;
+    // given clock net name, clock net Route Definition, change the internal design
     fn add_clock_net(
         &mut self,
         net_name:&str,
         net: &Vec<Route>,
     ) -> CTSPluginRes<()>;
+    // given buffer model, buffer location and orientation, change the internal design
     fn add_clock_buffer(
         &mut self,
-        name: &str,
         model: &str,
         location: (i32, i32),
         orient: i8,
     ) -> CTSPluginRes<()>;
+    // before load design ,first prepare layer map and via map
     fn prepare_layer_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
     fn prepare_via_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
+    // export standard def file
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
+    // import standard def file to load design , make sure first prepare layer map and via map
     fn import_def(&mut self, f: &str) -> CTSPluginRes<()>;
+    // get internal design unit
     fn get_length_dbu(&self) -> CTSPluginRes<u32>;
 }
 

@@ -1,2 +1,2 @@
 # cts-plugin
-Test-use plugin for clock tree synthesis
+Minimal use-case plugin for clock tree synthesis
