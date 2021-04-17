@@ -1,15 +1,13 @@
 pub enum PluginError {
-	FromDesign(DesignPlgError),
-	FromPDK(PDKPlgError),
+    FromDesign(DesignPlgError),
+    FromPDK(PDKPlgError),
 }
 
-enum DesignPlgError {
-	ClockNetNotFound,
-
+pub enum DesignPlgError {
+    ClockNetNotFound,
 }
 
-enum PDKPlgError {
-	LoginFailed,
-	LostConnection,
-	
+pub enum PDKPlgError {
+    LoginFailed,
+    LostConnection,
 }
