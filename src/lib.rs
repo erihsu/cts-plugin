@@ -22,6 +22,8 @@ pub trait PdkPlugin {
 pub trait DesignPlugin {
     // given clock network name, return a set of sinks. The information include model name, sink location and sink placement orient
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32), i8)>>;
+    // get clock input source, aka. CLK PIN
+    fn get_clock_source(&self,clk:&str) -> CTSPluginRes<(i32,i32)>; 
     // given clock net name, clock net Route Definition, change the internal design
     fn add_clock_net(
         &mut self,
