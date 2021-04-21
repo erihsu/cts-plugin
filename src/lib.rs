@@ -4,7 +4,7 @@ use std::error::Error;
 
 pub trait PdkPlugin {
     // given model name , get clk pin input capacitance
-    fn login(&mut self, username: &str, password: &str);
+    fn login(&mut self, username: &str, password: &str) -> CTSPluginRes<()>;
     fn get_sink_cap(&self, name: &str) -> CTSPluginRes<f32>;
     // given model name and placement, get its clk pin offset. The offset is mapping between orient code and coords
     // refer orient code to vulcan/src/parser/encoder.rs
