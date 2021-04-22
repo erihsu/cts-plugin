@@ -22,6 +22,10 @@ pub trait PdkPlugin {
 }
 
 pub trait DesignPlugin {
+    // login
+    fn login(&mut self, username: &str, password: &str) -> CTSPluginRes<()>;
+    // prepare
+    fn prepare_for_cts(&self) -> CTSPluginRes<()>;
     // given clock network name, return a set of sinks. The information include model name, sink location and sink placement orient
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32), i8)>>;
     // get clock input source, aka. CLK PIN
@@ -35,9 +39,6 @@ pub trait DesignPlugin {
         location: (i32, i32),
         orient: i8,
     ) -> CTSPluginRes<()>;
-    // before load design ,first prepare layer map and via map
-    fn prepare_layer_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
-    fn prepare_via_map(&mut self, map: Vec<(String, i16)>) -> CTSPluginRes<()>;
     // export standard def file
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
     // import standard def file to load design , make sure first prepare layer map and via map
