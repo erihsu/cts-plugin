@@ -23,6 +23,7 @@ pub trait PdkPlugin {
 pub trait DesignPlugin {
     // login
     fn login(&mut self, username: &str, password: &str) -> CTSPluginRes<()>;
+    fn logout(&mut self) -> CTSPluginRes<()>;
     // given clock network name, return a set of sinks. The information include model name, sink location and sink placement orient
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32), i8)>>;
     // get clock input source, aka. CLK PIN
