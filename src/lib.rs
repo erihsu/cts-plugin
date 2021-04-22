@@ -15,10 +15,8 @@ pub trait PdkPlugin {
     fn list_all_clock_buffer(&self) -> CTSPluginRes<Vec<String>>;
     // get metal layer unit resistance
     fn get_unit_resistance(&self) -> CTSPluginRes<f32>; // fF
-                                                        // get metal layer unit capacitance
+    // get metal layer unit capacitance
     fn get_unit_capacitance(&self) -> CTSPluginRes<f32>; // kohm
-    fn get_layer_map(&self) -> CTSPluginRes<Vec<(i16, String)>>;
-    fn get_via_map(&self) -> CTSPluginRes<Vec<(i16, String)>>;
 }
 
 pub trait DesignPlugin {
