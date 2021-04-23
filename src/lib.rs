@@ -41,6 +41,7 @@ pub trait DesignPlugin {
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
     // import standard def file to load design , make sure first prepare layer map and via map
     fn import_def(&mut self, path: &str) -> CTSPluginRes<()>;
+    fn analyze_design(&mut self) -> CTSPLuginRes<()>;
 }
 
 pub type CTSPluginRes<T> = Result<T, Box<dyn Error>>;
