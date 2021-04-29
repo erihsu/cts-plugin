@@ -10,16 +10,18 @@ pub trait CTSPlugin {
     fn logout(&mut self) -> CTSPluginRes<()>;
     // given clock network name, return a set of sinks. The information include sink name, sink location
     fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32))>>;
-    // given clock net name, clock net Route Definition, source component name, sink component name, change the internal design
-    fn add_clock_net(&mut self, net: &[Path],from:(String,(i32,i32)),to:Vec<(String,(i32,i32))>) -> CTSPluginRes<String>;
-    // given buffer model, buffer location and orientation, change the internal design
-    fn add_intermediate_buffer(&mut self,model: &str,location: (i32, i32)) -> CTSPluginRes<String>;
-    // add root buffer. this will automatically add the net between root buffer and clock source.
-    fn add_root_buffer(&mut self,model:&str,location:(i32,i32)) -> CTSPluginRes<String>;
+    // given clock net name, clock net Route Definition, change the internal design
+    fn update_clock_net(&mut self,net_name:&str, net: &[Path]) -> CTSPluginRes<()>;
+    // given buffer model, buffer location and orientation, change the internal design, return new clock net name
+    fn insert_clock_buffer(&mut self,model: &str,location: (i32, i32)) -> CTSPluginRes<String>;
     // export standard def file
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
+    // export verilog netlist
+    fn export_verilog(&self,path: &str) -> CTSPluginRes<()>;
     // import standard def file to load design , make sure first prepare layer map and via map
     fn import_def(&mut self, path: &str) -> CTSPluginRes<()>;
+    // import verilog netlist
+    fn import_verilog(&mut self,path:&str) -> CTSPluginRes<()>;
     
     /// Pdk related api
     // given model name, get buffer detailed information which includes power and timing
