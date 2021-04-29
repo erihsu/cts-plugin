@@ -9,11 +9,11 @@ pub trait CTSPlugin {
     // logout
     fn logout(&mut self) -> CTSPluginRes<()>;
     // given clock network name, return a set of sinks. The information include sink name, sink location
-    fn get_clock_sinks(&self, clk: &str) -> CTSPluginRes<Vec<(String, (i32, i32))>>;
+    fn get_clock_sinks(&self, clk:&str) -> CTSPluginRes<Vec<(String, (i32, i32))>>;
     // given clock net name, clock net Route Definition, change the internal design
     fn update_clock_net(&mut self,net_name:&str, net: &[Path]) -> CTSPluginRes<()>;
     // given buffer model, buffer location and orientation, change the internal design, return new clock net name
-    fn insert_clock_buffer(&mut self,model: &str,location: (i32, i32)) -> CTSPluginRes<String>;
+    fn insert_clock_buffer(&mut self,buffer_name:&str, model:&str, location:(i32, i32)) -> CTSPluginRes<String>;
     // export standard def file
     fn export_def(&self, path: &str) -> CTSPluginRes<()>;
     // export verilog netlist
