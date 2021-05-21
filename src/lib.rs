@@ -36,6 +36,7 @@ pub trait CTSPlugin {
 
 pub type CTSPluginRes<T> = Result<T, Box<dyn Error>>;
 
+#[derive(Clone)]
 pub struct Path {
     pub from: (i32, i32),
     pub turn: Option<(i32,i32)>,
