@@ -41,3 +41,17 @@ pub struct Path {
     pub turn: Option<(i32,i32)>,
     pub to: (i32, i32),
 }
+
+impl Path {
+    pub fn if_turn(&self) -> bool {
+        match self.turn {
+            Some(_) => true,
+            None => false,
+        }
+    }
+    pub fn length(&self) -> i32 {
+        (self.from.0 - self.to.0).abs() + (self.from.1 - self.to.1).abs()
+    }
+}
+
+
